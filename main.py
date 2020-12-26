@@ -6,9 +6,9 @@ import json
 import requests
 
 parser = argparse.ArgumentParser(description='Swagger/OpenAPI client generation tool',epilog='Enjoy the program!',prefix_chars='-')
-parser.add_argument('client',required=True,help='Name of the client for generating client PL codebase, example: java , go , python ...',type=str)
-parser.add_argument('filename',required=True,help='File location and name for generated client codebase',type=str)
-parser.add_argument('specloc',required=True,help='Location of swagger/openAPI specification file',type=str)
+parser.add_argument('client',help='Name of the client for generating client PL codebase, example: java , go , python ...',type=str)
+parser.add_argument('filename',help='File location and name for generated client codebase',type=str)
+parser.add_argument('specloc',help='Location of swagger/openAPI specification file',type=str)
 args = parser.parse_args()
 
 
@@ -32,3 +32,29 @@ def main(client,filename,spec):
 
 if(args.client and args.filename and args.specloc):
     main(args.client,args.filename,args.specloc)
+
+# --- Client generation ---
+# curl -X POST \
+#   https://generator3.swagger.io/api/generate \
+#   -H 'content-type: application/json' \
+#   -d '{
+#   "specURL" : "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml",
+#   "lang" : "java",
+#   "type" : "CLIENT",
+#   "codegenVersion" : "V3"
+# }'
+
+# -- Aditional options --
+# {
+#   "specURL" : "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml",
+#   "lang" : "java",
+#   "options" : {
+#     "additionalProperties" : {
+#     	"useRuntimeException": true,
+#     	"useRxJava" : true
+#     }
+#   },
+#   "type" : "CLIENT",
+#   "codegenVersion" : "V3"
+# }
+
